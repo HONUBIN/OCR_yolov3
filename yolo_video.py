@@ -6,7 +6,9 @@ import cv2
 import numpy
 
 def detect_img(yolo):
+    count = 0
     while True:
+        count += 1
         img = input('Input image filename:')
         try:
             image = Image.open(img)
@@ -15,7 +17,7 @@ def detect_img(yolo):
             continue
         else:
             r_image = yolo.detect_image(image)
-            # r_image.show()
+            r_image.show()
             opencvImage = cv2.cvtColor(numpy.array(image), cv2.COLOR_RGB2BGR)
             cv2.imwrite('pictures/test_result.png',opencvImage)
     yolo.close_session()

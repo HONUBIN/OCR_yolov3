@@ -24,5 +24,6 @@ for i, a in enumerate(brush):
         f.write("0")
         if j < len(b) - 1:
             f.write(" ")
+    f.write("\n")
     brush_list = list(brush[i]['regions'].values())
 f.close()

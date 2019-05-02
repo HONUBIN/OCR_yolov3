@@ -65,7 +65,7 @@ def _main(annotation_path, classes_path, output_model_path):
         #     # use custom yolo_loss Lambda layer.
         #     'yolo_loss': lambda y_true, y_pred: y_pred})
 
-        model.compile(optimizer=Adam(lr=1e-4), loss='mean_squared_error')
+        model.compile(optimizer=Adam(lr=1e-3), loss='mean_squared_error')
 
         batch_size = 32
         print('Train on {} samples, val on {} samples, with batch size {}.'.format(num_train, num_val, batch_size))
@@ -75,7 +75,7 @@ def _main(annotation_path, classes_path, output_model_path):
                 validation_steps=max(1, num_val//batch_size),
                 epochs=10,
                 initial_epoch=0,
-                callbacks=[logging, checkpoint])
+                callbacks=[checkpoint])
         # model.save_weights(log_dir + 'trained_weights_stage_1.h5')
         # model.save(log_dir + 'trained_model_stage_1.h5')
 

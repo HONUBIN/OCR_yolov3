@@ -46,7 +46,6 @@ class YOLO(object):
         self.anchors = self._get_anchors()
         self.sess = K.get_session()
         self.boxes, self.scores, self.classes = self.generate()
-        self.model =
 
     def _get_class(self):
         classes_path = os.path.expanduser(self.classes_path)
@@ -143,11 +142,13 @@ class YOLO(object):
             top, left, bottom, right = box
             area = (left, top, right, bottom)
             cropped_img = image.crop(area)
+            '''
             origin = Image.open('images/image.jpg')
             vector1 = image_parse(10, origin)
             vector2 = image_parse(10, cropped_img)
+            '''
             # if predicted_class == 'bottle' and (compare_color(origin, cropped_img) and cosine_compare(vector1, vector2, 10)):
-            if predicted_class == 'bottle' and (histogram_intersection(origin, cropped_img) and (cosine_compare(vector1, vector2, 10) or compare_color(origin, cropped_img))):
+            if predicted_class == 'characters':
                 label = '{} {:.2f}'.format(predicted_class, score)
                 draw = ImageDraw.Draw(image)
                 label_size = draw.textsize(label, font)
